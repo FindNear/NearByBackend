@@ -3,6 +3,7 @@ const express = require('express');
 
 const app = express(json);
 const apiKey = "AIzaSyCGngGGClD4hATm3ZfMN4gW9tW0QtyJ_OQ"
+const port = process.env.port || 3000
 
 var axios = require('axios');
 
@@ -38,4 +39,4 @@ app.get('/:lat/:long/:mode/:time', (req,res) => {
     });
 })
 
-app.listen(3000);
+app.listen(port);
