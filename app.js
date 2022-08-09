@@ -6,6 +6,7 @@ const apiKey = "AIzaSyCGngGGClD4hATm3ZfMN4gW9tW0QtyJ_OQ"
 
 var axios = require('axios');
 
+//Speeds in m/s
 var speeds = {
     "walk": 1.4
 }
@@ -17,10 +18,14 @@ app.get('/', (req, res) => {
 app.get('/:lat/:long/:mode/:time', (req,res) => {
     var location = req.params.lat + "%2C" + req.params.long
     var radius = speeds[req.params.mode] * req.params.time * 60
-
+    if (req.query.type) {
+        var type = req.query.type
+    } else {
+        var type = "restaurant"
+    }
     var config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+ location + '&radius=' + radius + '&type=restaurant&key=' + apiKey,
+        url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location='+ location + '&radius=' + radius + '&type=' + type + '&key=' + apiKey,
         headers: { }
     };
 
